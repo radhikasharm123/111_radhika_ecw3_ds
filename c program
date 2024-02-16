@@ -1,0 +1,164 @@
+#include<stdio.h>
+
+void linearsearch(int arr[], int size, int searched_element);
+void insertelement(int arr[], int size, int x,int i, int pos);
+void deleteElement(int arr[], int *size, int pos);
+void reversearray(int arr[], int size);
+void updatearray(int arr[] , int size);
+int main() {
+
+   //INPUT ARRAY
+   int arr[100], i, size, pos, searched_element, x;
+   char choice;
+   printf("Enter the size of array : ");
+   scanf("%d", &size);
+   printf("ENTER %d ELEMENTS : ",size);
+for(int i=0; i<size; i++) {
+   scanf("%d",&arr[i]);
+}
+
+   //OUTPUT ARRAY
+    printf("ARRAY := ");
+for(i=0; i<size; i++) {
+  
+   printf("%d \t", arr[i]);
+}
+
+do{
+   printf("\nMENU :-\n");
+   printf("a). LINEAR SEARCH \n");
+   printf("b). INSERTION \n");
+   printf("c). DELETION \n");
+   printf("d). REVERSE ARRAY \n");
+   printf("e). UPDATE ARRAY \n");
+   printf("f). EXIT PROGRAM, BYE!\n");
+   printf("ENTER YOUR CHOICE : ");
+   scanf(" %c",&choice);
+
+   switch(choice) {
+      case 'a' :
+      printf("enter the element to search : ");
+      scanf("%d" , &searched_element);
+      linearsearch(arr, size, searched_element);
+      break;
+
+      case 'b':
+      printf("Enter the number to insert : ");
+      scanf("%d", &x);
+      printf("enter the position to insert : ");
+      scanf("%d", &pos);
+      size++;
+      insertelement(arr, size, x,i, pos);
+       for(i=0; i<size ; i++){
+      printf( "%d \t" , arr[i] );
+      }  
+      
+      break;
+
+      case 'c' :
+      printf("enter the position to delete : ");
+      scanf("%d", &pos);
+      
+      deleteElement(arr, &size, pos);
+       for(i=0; i<size ; i++){
+      printf( "%d \t" , arr[i] );
+      }  
+      break;
+
+      case 'd' :
+      reversearray(arr, size);
+      printf("ARRAY REVERSED SUCCESFULLY!\n");
+      for(i=0; i<size; i++) {
+         printf("%d \t", arr[i]);
+      }
+      break;
+
+      case 'e' :
+      updatearray(arr, size);
+      printf("ARRAY UPDATED SUCCESSFULLY\n NEW ARRAY = ");
+      // TO PRINT UPDATED ARRAY
+      for(i=0; i<size ; i++){
+      printf( "%d \t" , arr[i] );
+      }  
+      
+      break;
+
+      case 'f' :
+      printf("EXITING THE PROGRAM. BYE! \n");
+      break;
+
+      default:
+      printf("WRONG CHOICE!. TRY AGAIN");
+   }
+}
+   while (choice != 'f');
+
+     return 0;
+
+}
+
+void linearsearch(int arr[], int size, int searched_element) {
+   int found = 0;
+   for(int i=0; i<size; i++) {
+      if(arr[i] == searched_element) {
+         printf("element %d found at %d position\n", searched_element, i+1);
+         found = 1;
+         break;
+      }
+   }
+      if(!found) {
+         printf("NOT FOUND\n");
+      }
+}
+
+void insertelement(int arr[], int size, int x, int i, int pos) {
+      if(pos < 0 || pos > size) {
+         printf("wrong position entered! \n");
+      }
+     else {
+      for(int i=size-1; i>=pos ; i--) {
+         arr[i]=arr[i-1];
+      }
+
+      arr[pos-1] = x;
+      size++;
+      printf("element %d inserted at position %d\n ", x, pos);
+     }
+
+}
+
+void deleteElement(int arr[], int *size, int pos) {
+       if(pos <0 || pos > *size) {
+         printf("Wrong position entered!\n");
+       }
+       else {
+         for(int i = pos - 1; i > *size-1; i++) {
+        arr[i] = arr[i+1];
+         }
+         (*size)--;
+         printf("DELETED ELEMENT FROM THE position %d.\n",pos);
+       }
+}
+
+void reversearray(int arr[], int size) {
+   int temp;
+   for(int i=0; i < size/2; i++) {
+      temp = arr[i];
+      arr[i] = arr[size-i-1];
+      arr[size-i-1] = temp;
+      
+   }
+}
+
+void updatearray(int arr[] , int size) {
+   for(int i =0; i<size; i++) {
+      if (i % 2 == 0) {
+         arr[i] += 5;
+
+      }
+      else {
+         arr[i] *= 2;
+      }
+   }
+}
+
