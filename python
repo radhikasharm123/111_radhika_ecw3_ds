@@ -1,0 +1,87 @@
+def display_array(arr):
+  print("Array: ", arr)
+
+def linear_search(arr, x):
+  for i in range(len(arr)):
+    if arr[i] == x:
+      return i
+  return -1
+
+def insert_at(arr, pos, x):
+  if pos < 0 or pos >= len(arr):
+    print("Invalid position")
+    return
+  arr.insert(pos, x)
+
+def delete_at(arr, pos):
+  if pos < 0 or pos >= len(arr):
+    print("Invalid position")
+    return
+  arr.pop(pos)
+
+def reverse_array(arr):
+  arr.reverse()
+
+def update_array(arr):
+  for i in range(len(arr)):
+    if i % 2 == 0:
+      arr[i] *= 2
+    else:
+      arr[i] += 5
+
+def main():
+  arr = []
+  n = 0
+
+  while True:
+    print("\n1. Input array")
+    print("2. Linear search")
+    print("3. Insert at a position")
+    print("4. Delete at a position")
+    print("5. Reverse array")
+    print("6. Update array")
+    print("7. Exit")
+
+    choice = int(input("Enter your choice: "))
+
+    if choice == 1:
+      print("Enter the number of elements: ")
+      n = int(input())
+      print("Enter the elements: ")
+      for i in range(n):
+        arr.append(int(input()))
+    elif choice == 2:
+      print("Enter the element to search for: ")
+      x = int(input())
+      pos = linear_search(arr, x)
+      if pos != -1:
+        print("Element found at position: ", pos)
+      else:
+        print("Element not found")
+    elif choice == 3:
+      print("Enter the position and element to insert: ")
+      input_str = input()
+      parts = input_str.split()
+      pos = int(parts[0])
+      x = int(parts[1])
+      insert_at(arr, pos, x)
+      display_array(arr)
+    elif choice == 4:
+      print("Enter the position to delete: ")
+      pos = int(input())
+      delete_at(arr, pos)
+      display_array(arr)
+    elif choice == 5:
+      reverse_array(arr)
+      display_array(arr)
+    elif choice == 6:
+      update_array(arr)
+      display_array(arr)
+    elif choice == 7:
+      print("Exiting...")
+      break
+    else:
+      print("Invalid choice")
+
+if __name__ == "__main__":
+  main()
