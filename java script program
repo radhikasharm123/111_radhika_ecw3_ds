@@ -1,0 +1,101 @@
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+let array = [1,5,8,9,10];
+
+function linearSearch(key) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === key) {
+            return i; // Return the index if element found
+        }
+    }
+    return -1; // Return -1 if element not found
+}
+
+function insertElement(pos, element) {
+    array.splice(pos, 0, element); // Insert element at specified position
+}
+
+function deleteElement(pos) {
+    array.splice(pos, 1); // Delete element at specified position
+}
+
+function reverseArray() {
+    array.reverse(); // Reverse the array
+}
+
+function updateArray() {
+    for (let i = 0; i < array.length; i++) {
+        if (i % 2 === 0) {
+            array[i] += 5; // Add 5 to even indexes
+        } else {
+            array[i] *= 2; // Multiply odd indexes by 2
+        }
+    }
+}
+
+function displayArray() {
+    console.log("Array:", array);
+}
+
+function menu() {
+    console.log("\nMenu:");
+    console.log("1. Linear Search");
+    console.log("2. Insert Element");
+    console.log("3. Delete Element");
+    console.log("4. Reverse Array");
+    console.log("5. Update Array");
+    console.log("6. Display Array");
+    console.log("7. Exit");
+
+    rl.question("Enter your choice: ", (choice) => {
+        switch (parseInt(choice)) {
+            case 1:
+                rl.question("Enter the element to search: ", (element) => {
+                    console.log("Index of element", element + ":", linearSearch(parseInt(element)));
+                    menu();
+                });
+                break;
+            case 2:
+                rl.question("Enter the position: ", (pos) => {
+                    rl.question("Enter the element to insert: ", (element) => {
+                        insertElement(parseInt(pos), parseInt(element));
+                        menu();
+                    });
+                });
+                break;
+            case 3:
+                rl.question("Enter the position: ", (pos) => {
+                    deleteElement(parseInt(pos));
+                    menu();
+                });
+                break;
+            case 4:
+                reverseArray();
+                console.log("Array reversed.");
+                menu();
+                break;
+            case 5:
+                updateArray();
+                console.log("Array updated.");
+                menu();
+                break;
+            case 6:
+                displayArray();
+                menu();
+                break;
+            case 7:
+                console.log("Exiting program.");
+                rl.close();
+                break;
+            default:
+                console.log("Invalid choice. Please enter a valid option.");
+                menu();
+        }
+    });
+}
+
+menu();
